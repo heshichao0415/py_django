@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 70%; margin: 0">
+       <div id="container" style="height: 70%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="DVVwy1f1tHK4z4M0IF1QdkgGZXOPYG8F"></script>  <!--访问码-->
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    title : {
+        text: '测试统计数据',     <!--标题-->
+        subtext: '超哥测试专用',      <!--副标题-->
+        x:'center'
+    },
+    tooltip : {                  <!--tooltip 鼠标交互时的信息提示-->
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {                     <!--图例-->
+        orient: 'vertical',
+        left: 'left',
+        data: ['成功','失败','跳过','错误']
+    },
+    series : [                  <!--系列列表,每个系列通过 type 决定自己的图表类型-->
+        {
+            name: '数据统计',
+            type: 'pie',
+            radius : '62%',
+            center: ['50%', '65%'],
+            minAngle:'15',
+            data:[
+                {value:109, name:'成功'},
+                {value:11, name:'失败'},
+                {value:9, name:'错误'},
+                {value:22, name:'跳过'},
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+                normal: {                    <!--颜色-->
+                    color:function(params) {
+                        var colorList = [
+                            '#008000', '#FF0000', '#cd5c5c', '#FFd700',
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    label: {                  <!--数据显示-->
+                        show: true,
+                        formatter: '{b}:{c}({d}%)'
+                    },
+                    labelLine: {show: true}
+                }
+            }
+        }
+    ]
+};
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动化测试报告</title>
+	<style>
+		body{
+			height: 640px;
+		}
+		header{
+			height: 15%;
+		}
+		aside{
+			width: 40%;height: 50%;float: left;background-color: aliceblue;
+		}
+		section{
+			width: 60%;height: 50%;float: left;background-color: #305070;
+		}
+		footer{
+			height: 80%;clear: left;background-color:whitesmoke;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h2 align="center" style="color:lightblue">ZY接口自动化测试报告</h2><br>
+	</header>
+	<aside>
+        <h3 align="top">测试基本信息</h3>
+        <table border="1px" width="80%" cellspacing="0" align="left">
+        {% for basic in basics %}
+            <thead>
+        <tr align="center">
+            <td width="40%" height="30">开始时间</td><td>{{ basic.start_time }}</td>
+        </tr>
+        <tr align="center">
+            <td width="40%" height="30">结束时间</td><td>{{ basic.end_time }}</td>
+        </tr>
+        <tr align="center">
+            <td width="40%" height="30">测试用时</td><td>{{ basic.sum_case }}秒</td>
+        </tr>
+        <tr align="center">
+            <td width="40%" height="30">总用例数</td><td>{{ basic.sum_case }}个</td>
+        </tr>
+        <tr align="center">
+            <td width="40%" height="30">执行用例数</td><td>{{ basic.run_case }}个</td>
+        </tr>
+        <tr align="center">
+            <td width="40%" height="30">跳过用例数</td><td>{{ basic.skip_case }}个</td>
+        </tr>
+            {% endfor %}
+            </thead>
+    </table>
+	</aside>
+	<section>
+       <div id="container" style="height: 70%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="DVVwy1f1tHK4z4M0IF1QdkgGZXOPYG8F"></script>  <!--访问码-->
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+var kv = new Array();    //声明一个新的字典
+kv ={{ data|safe }};     //取出后台传递的数据，此处添加safe过滤避免警告
+    var test = new Array();    //声明一个新的字典用于存放数据
+for (var logKey in kv) {
+    test.push({value: kv[logKey], name:logKey});  //将对应键值对取出存入test，logKey 为该字典的键
+}
+option = null;
+option = {
+    title : {
+        show:true,
+        text: '测试统计数据',     //标题
+        subtext: '超哥测试专用',      //副标题
+        x:'center'
+    },
+    tooltip : {                  //--tooltip 鼠标交互时的信息提示
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {                     //--图例--
+        orient: 'vertical',
+        left: 'left',
+        data: ['成功', '失败', '错误', '跳过']    //图例显示
+    },
+    series : [                  //系列列表,每个系列通过 type 决定自己的图表类型
+        {
+            name: '数据统计',
+            type: 'pie',
+            radius : '62%',
+            center: ['50%', '65%'],
+            minAngle:'15',
+            data: test,   //赋值方式为字典传值，传递值前端显示
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+                normal: {
+                    color:function(params) {
+                        var colorList = [
+                            '#cd5c5c', '#FFd700', '#FF0000', '#008000', //颜色008000绿色
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    label: {                  <!--数据显示-->
+                        show: true,
+                        formatter: '{b}:{c}({d}%)'
+                    },
+                    labelLine: {show: true}
+                }
+            }
+        }
+    ]
+};
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+	</section>
+	<footer>
+        <style>
+            div{
+                width: 10%; height: 50px; display: inline-block; text-align: center; line-height: 50px;
+            }
+            .box1{
+                background: cadetblue;
+            }
+            .box2{
+                background: crimson;
+            }
+            .box3{
+                background: gold;
+            }
+            .box4{
+                background: green;
+            }
+            .box5{
+                background: coral;
+            }
+        </style>
+            <div class="box1">
+                <font color="white" size="3.5" face="微软雅黑">全部（{{ ddd }}）</font>
+            </div>
+            <div class="box2">
+                <font color="white" size="3.5" face="微软雅黑">成功（{{ ddd }}）</font>
+            </div>
+            <div class="box3">
+                <font color="white" size="3.5" face="微软雅黑">失败（{{ ddd }}）</font>
+            </div>
+            <div class="box4">
+                <font color="white" size="3.5" face="微软雅黑">错误（{{ ddd }}）</font>
+            </div>
+            <div class="box5">
+                <font color="white" size="3.5" face="微软雅黑">跳过（{{ ddd }}）</font>
+            </div>
+	</footer>
+
+</body>
+</html>
