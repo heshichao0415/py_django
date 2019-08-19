@@ -49,8 +49,9 @@ def py_test(request):
     data.update({'错误': data.pop('error_cases')})
     data.update({'跳过': data.pop('skip_cases')})
     test_list = Basic.objects.all()
+    statis_list = Statistics.objects.all()
     username = request.session.get('user', '')
-    return render(request, 'mytest.html', {'user': username, 'basics': test_list, 'data': data}) #返回到前端
+    return render(request, 'mytest.html', {'user': username, 'basics': test_list, 'data': data, 'statis': statis_list}) #返回到前端
 
 
 

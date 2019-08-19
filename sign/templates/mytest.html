@@ -17,13 +17,13 @@
 			width: 50%;height: 50%;float: left;background-color: #305070;
 		}
 		footer{
-			height: 80%;clear: left;background-color:whitesmoke;
+			height: 9%;clear: left;background-color:whitesmoke;
 		}
 	</style>
 </head>
 <body>
 	<header>
-		<h2 align="center" style="color:lightblue">ZY接口自动化测试报告</h2><br>
+		<h2 align="center" style="color:lightblue">ZY接口自动化测试报告(ZY生产环境)</h2><br>
 	</header>
 	<aside>
         <h3 align="top">测试基本信息</h3>
@@ -129,7 +129,7 @@ if (option && typeof option === "object") {
 	<footer>
         <style>
             div{
-                width: 10%; height: 50px; display: inline-block; text-align: center; line-height: 50px;
+                width: 15%; height: 50px; display: inline-block; text-align: center; line-height: 50px;
             }
             .box1{
                 background: cadetblue;
@@ -147,23 +147,34 @@ if (option && typeof option === "object") {
                 background: coral;
             }
         </style>
+            {% for basic in basics %}
+            {% for stat in statis %}
             <div class="box1">
-                <font color="white" size="3.5" face="微软雅黑">全部（{{ ddd }}）</font>
+                <font color="white" size="3.5" face="微软雅黑">全部（{{ basic.sum_case }}）</font>
             </div>
             <div class="box2">
-                <font color="white" size="3.5" face="微软雅黑">成功（{{ ddd }}）</font>
+                <font color="white" size="3.5" face="微软雅黑">成功（{{ stat.success_cases }}）</font>
             </div>
             <div class="box3">
-                <font color="white" size="3.5" face="微软雅黑">失败（{{ ddd }}）</font>
+                <font color="white" size="3.5" face="微软雅黑">失败（{{ stat.fail_cases }}）</font>
             </div>
             <div class="box4">
-                <font color="white" size="3.5" face="微软雅黑">错误（{{ ddd }}）</font>
+                <font color="white" size="3.5" face="微软雅黑">错误（{{ stat.error_cases }}）</font>
             </div>
             <div class="box5">
-                <font color="white" size="3.5" face="微软雅黑">跳过（{{ ddd }}）</font>
+                <font color="white" size="3.5" face="微软雅黑">跳过（{{ stat.skip_cases }}）</font>
             </div>
-        <br><a>未完待续.......</a>
+        {% endfor %}
+        {% endfor %}
 	</footer>
-
+        <table border="1px" width="90%" cellspacing="0" align="left">
+            <thead>
+            <tr>
+                <th>项目名称</th><th width="200px">用例编号</th><th width="180px">用例名称</th><th width="220px">接口地址</th><th>接口方法</th>
+                <th>测试结果</th><th>详细信息</th>
+            </tr>
+            </thead>
+        </table>
+        未完待续..........
 </body>
 </html>
