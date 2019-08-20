@@ -194,7 +194,7 @@ if (option && typeof option === "object") {
                     <td>{{ details.aip_method }}</td>
                     <td>{{ details.test_result }}</td>
                     <td>
-                        <a href="/py_details/" target="_blank">{{ details.case_detail }}</a>
+                        <a href="/py_details/" target="_blank" name="{{ details.case_number }}">{{ details.case_detail }}</a>
                     </td>
                 </tr>
             {% endfor %}

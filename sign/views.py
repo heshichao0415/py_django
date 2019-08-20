@@ -57,6 +57,7 @@ def py_test(request):
 
 def py_details(request):
     username = request.session.get('user', '')
-    test_list = testdetails.objects.all()
+    test_name = request.GET.get('name', '')
+    test_list = testdetails.objects.filter(name__contains=test_name)
     return render(request, 'details.html', {'user': username, 'tests': test_list})
 
