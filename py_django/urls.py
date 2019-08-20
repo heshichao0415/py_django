@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^py_test/', views.py_test),
     url(r'^action_login/', views.action_login),
     url(r'^test/', views.test),
+    url(r'^py_details/', views.py_details),
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from sign.models import Basic, Statistics
+from sign.models import Basic, Statistics, Detail, testdetails
 from django.forms.models import model_to_dict     #类用于将数据库中读取的数据转化为字典
 from django.contrib.auth import authenticate, login
 # Create your views here.
@@ -50,8 +50,13 @@ def py_test(request):
     data.update({'跳过': data.pop('skip_cases')})
     test_list = Basic.objects.all()
     statis_list = Statistics.objects.all()
+    detail_list = Detail.objects.all()
     username = request.session.get('user', '')
-    return render(request, 'mytest.html', {'user': username, 'basics': test_list, 'data': data, 'statis': statis_list}) #返回到前端
+    return render(request, 'mytest.html', {'user': username, 'basics': test_list, 'data': data, 'statis': statis_list,
+                                           'detail': detail_list}) #返回到前端
 
-
+def py_details(request):
+    username = request.session.get('user', '')
+    test_list = testdetails.objects.all()
+    return render(request, 'details.html', {'user': username, 'tests': test_list})
 

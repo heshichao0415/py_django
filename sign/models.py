@@ -20,3 +20,22 @@ class Statistics(models.Model):
     error_cases = models.IntegerField()           #错误用例数
     skip_cases = models.IntegerField()            #跳过用例数
 
+#详细数据统计
+class Detail(models.Model):
+    name = models.CharField(max_length=100)           #项目名称
+    case_number = models.CharField(max_length=200)       #用例编号
+    case_name = models.CharField(max_length=200)         #用例名称
+    aip_address = models.CharField(max_length=200)       #接口地址
+    aip_method = models.CharField(max_length=100)        #接口方法
+    test_result = models.BooleanField()                 #测试结果
+    case_detail = models.CharField(max_length=100)      #详细情况
+
+class testdetails(models.Model):
+    id1 = models.ForeignKey(Detail)
+    name = models.CharField(max_length=300)
+    case_name = models.CharField(max_length=300)
+    api_address = models.CharField(max_length=200)
+    api_method = models.CharField(max_length=200)
+    case_data = models.CharField(max_length=200)
+    result_data = models.CharField(max_length=300)
+    test_result = models.BooleanField()

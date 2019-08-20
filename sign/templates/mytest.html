@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 	<meta charset="UTF-8">
 	<title>自动化测试报告</title>
 	<style>
@@ -8,13 +11,13 @@
 			height: 640px;
 		}
 		header{
-			height: 15%;
+			height: 15%;width: 90%;
 		}
 		aside{
-			width: 40%;height: 50%;float: left;background-color: aliceblue;
+			width: 40%;height: 40%;float: left;background-color: aliceblue;
 		}
 		section{
-			width: 50%;height: 50%;float: left;background-color: #305070;
+			width: 50%;height: 40%;float: left;background-color: #305070;
 		}
 		footer{
 			height: 9%;clear: left;background-color:whitesmoke;
@@ -23,7 +26,9 @@
 </head>
 <body>
 	<header>
-		<h2 align="center" style="color:lightblue">ZY接口自动化测试报告(ZY生产环境)</h2><br>
+		<h2 align="center" style="color:lightblue">ZY接口自动化测试报告(ZY生产环境)</h2>
+        <a style="float: right">嘿！欢迎{{ user }}</a><br>
+        <a href="/login/" style="float: right">退出</a>
 	</header>
 	<aside>
         <h3 align="top">测试基本信息</h3>
@@ -167,14 +172,34 @@ if (option && typeof option === "object") {
         {% endfor %}
         {% endfor %}
 	</footer>
-        <table border="1px" width="90%" cellspacing="0" align="left">
+        <table border="1px" width="90%" cellspacing="0" align="left" style="text-align: center">
             <thead>
-            <tr>
-                <th>项目名称</th><th width="200px">用例编号</th><th width="180px">用例名称</th><th width="220px">接口地址</th><th>接口方法</th>
-                <th>测试结果</th><th>详细信息</th>
+            <tr style="text-align: center" bgcolor="#faebd7">
+                <th style="text-align: center" width="150px" height="50px">项目名称</th>
+                <th width="250px" style="text-align: center">用例编号</th>
+                <th width="200px" style="text-align: center">用例名称</th>
+                <th width="300px" style="text-align: center">接口地址</th>
+                <th style="text-align: center" width="100px">接口方法</th>
+                <th style="text-align: center" width="100px">测试结果</th>
+                <th style="text-align: center" width="100px">详细信息</th>
             </tr>
             </thead>
+            <tbody>
+            {% for details in detail %}
+                <tr style="height: 40px">
+                    <td>{{ details.name }}</td>
+                    <td>{{ details.case_number }}</td>
+                    <td>{{ details.case_name }}</td>
+                    <td>{{ details.aip_address }}</td>
+                    <td>{{ details.aip_method }}</td>
+                    <td>{{ details.test_result }}</td>
+                    <td>
+                        <a href="/py_details/" target="_blank">{{ details.case_detail }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
         </table>
-        未完待续...........
+
 </body>
 </html>

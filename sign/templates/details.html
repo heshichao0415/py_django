@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+	<meta charset="UTF-8">
+	<title>自动化测试报告</title>
+	<style>
+		body{
+			height: 640px;
+		}
+		header{
+			height: 15%;width: 90%;
+		}
+		footer{
+			height: 100%;clear: left;background-color:whitesmoke;
+		}
+	</style>
+    </head>
+    <body>
+    <header>
+    <h2 align="center" style="color:lightblue">接口详细报告</h2>
+    </header>
+    <footer>
+        <table border="1px" width="90%" cellspacing="0" align="left" style="text-align: center">
+            <thead>
+            <tr style="text-align: center" bgcolor="#faebd7">
+                <th style="text-align: center" width="150px" height="50px">项目名称</th>
+                <th width="250px" style="text-align: center">接口名称</th>
+                <th width="200px" style="text-align: center">接口地址</th>
+                <th width="100px" style="text-align: center">接口方法</th>
+                <th style="text-align: center" width="200px">参数传递</th>
+                <th style="text-align: center" width="200px">返回结果</th>
+                <th style="text-align: center" width="100px">测试结果</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for test in tests %}
+                <tr style="height: 40px">
+                    <td>{{ test.name }}</td>
+                    <td>{{ test.case_name }}</td>
+                    <td>{{ test.api_address }}</td>
+                    <td>{{ test.api_method }}</td>
+                    <td>{{ test.case_data }}</td>
+                    <td>{{ test.result_data }}</td>
+                    <td>{{ test.test_result }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </footer>
+</body>
+</html>
